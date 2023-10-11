@@ -7,20 +7,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.kata.spring.boot_security.demo.entity.User;
-import ru.kata.spring.boot_security.demo.repository.UserRepository;
+import ru.kata.spring.boot_security.demo.dao.UserDAO;
 
 @Service
 public class UserServiceSecurity implements UserDetailsService {
-    private final UserRepository userRepository;
 
-    public UserServiceSecurity(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    private final UserDAO userDao;
+
+    public UserServiceSecurity(UserDAO userDao) {
+        this.userDao = userDao;
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        User user = userDao.findByUserName(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         }

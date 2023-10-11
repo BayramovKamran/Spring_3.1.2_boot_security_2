@@ -21,16 +21,20 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "username", unique = true)
     @NotEmpty(message = "имя не должен быть пустым")
     @Size(min = 4, message = "В имени должно быть не менее 4 знаков")
     private String username;
+
     @Column(name = "email")
     @NotEmpty(message = "email не должен быть пустым")
     private String email;
+
     @Column(name = "password")
     private String password;
 
