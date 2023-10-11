@@ -12,6 +12,14 @@
     <input type="text" th:field="*{username}" id="username">
     <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">First Name error</div>
     <br>
+    <label for="lastname">Фамилия</label>
+    <label for="lastname"></label><input type="text" th:field="*{lastname}" id="lastname">
+    <div style="color: red" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">First Name error</div>
+    <br>
+    <label for="age">Возраст</label>
+    <label for="age"></label><input type="text" th:field="*{age}" id="age">
+    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">First Name error</div>
+    <br>
     <label for="email">Email</label>
     <input type="text" th:field="*{email}" id="email">
     <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">First Name error</div>

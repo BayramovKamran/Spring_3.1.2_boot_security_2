@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -31,6 +31,14 @@ public class User implements UserDetails {
     @Size(min = 4, message = "В имени должно быть не менее 4 знаков")
     private String username;
 
+    @Column(name = "lastname")
+    @NotEmpty(message = "фамилия не должен быть пустым")
+    @Size(min = 4, message = "В фамилии должно быть не менее 4 знаков")
+    private String lastname;
+
+    @Column(name = "age")
+    private Integer age;
+
     @Column(name = "email")
     @NotEmpty(message = "email не должен быть пустым")
     private String email;
@@ -43,13 +51,15 @@ public class User implements UserDetails {
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String lastname, Integer age, String email, String password) {
         this.username = username;
+        this.lastname = lastname;
+        this.age = age;
         this.email = email;
         this.password = password;
     }
@@ -78,11 +88,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
@@ -120,6 +130,24 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 }
+
+
 
 
