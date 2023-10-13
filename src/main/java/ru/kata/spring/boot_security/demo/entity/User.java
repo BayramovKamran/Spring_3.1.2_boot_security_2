@@ -13,10 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -25,27 +27,22 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "username", unique = true)
     @NotEmpty(message = "имя не должен быть пустым")
     @Size(min = 4, message = "В имени должно быть не менее 4 знаков")
     private String username;
-
     @Column(name = "lastname")
     @NotEmpty(message = "фамилия не должен быть пустым")
     @Size(min = 4, message = "В фамилии должно быть не менее 4 знаков")
     private String lastname;
-
     @Column(name = "age")
+    @Max(100)
     private Integer age;
-
     @Column(name = "email")
     @NotEmpty(message = "email не должен быть пустым")
     private String email;
-
     @Column(name = "password")
     private String password;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
@@ -145,6 +142,19 @@ public class User implements UserDetails {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(lastname, user.lastname) && Objects.equals(age, user.age) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, lastname, age, email, password, roles);
     }
 }
 

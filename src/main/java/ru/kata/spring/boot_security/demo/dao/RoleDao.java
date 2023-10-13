@@ -4,11 +4,9 @@ import ru.kata.spring.boot_security.demo.entity.Role;
 
 import java.util.List;
 
-public interface RoleDAO {
+public interface RoleDao {
 
     List<Role> getByName(String name);
-
     void saveRole(Role role);
-
     List<Role> getRoleList();
 }

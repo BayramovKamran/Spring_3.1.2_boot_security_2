@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.kata.spring.boot_security.demo.entity.User;
-import ru.kata.spring.boot_security.demo.dao.UserDAO;
+import ru.kata.spring.boot_security.demo.dao.UserDao;
 
 @Service
 public class UserServiceSecurity implements UserDetailsService {
 
-    private final UserDAO userDao;
+    private final UserDao userDao;
 
-    public UserServiceSecurity(UserDAO userDao) {
+    public UserServiceSecurity(UserDao userDao) {
         this.userDao = userDao;
     }
 

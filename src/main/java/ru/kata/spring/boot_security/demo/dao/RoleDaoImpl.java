@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Repository
 @Transactional
-public class RoleDAOImpl implements RoleDAO {
+public class RoleDaoImpl implements RoleDao {
 
     @PersistenceContext
     private EntityManager entityManager;

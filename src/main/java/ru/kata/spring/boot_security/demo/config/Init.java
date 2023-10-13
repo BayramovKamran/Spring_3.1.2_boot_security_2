@@ -4,8 +4,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import ru.kata.spring.boot_security.demo.dao.RoleDAO;
-import ru.kata.spring.boot_security.demo.dao.UserDAO;
+import ru.kata.spring.boot_security.demo.dao.RoleDao;
+import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
 
@@ -16,11 +16,11 @@ import java.util.List;
 @Component
 public class Init implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final RoleDAO roleDao;
-    private final UserDAO userDao;
+    private final RoleDao roleDao;
+    private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
 
-    public Init(RoleDAO roleDao, UserDAO userDao, PasswordEncoder passwordEncoder) {
+    public Init(RoleDao roleDao, UserDao userDao, PasswordEncoder passwordEncoder) {
         this.roleDao = roleDao;
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
@@ -39,11 +39,11 @@ public class Init implements ApplicationListener<ContextRefreshedEvent> {
         roleDao.saveRole(adminRole);
 
         List<Role> userRoles = List.of(userRole);
-        List<Role> adminRoles = Arrays.asList(adminRole, userRole);
+        List<Role> adminRoles = List.of(adminRole);
 
         User admin = new User();
-        admin.setUsername("admin");
-        admin.setLastname("admin");
+        admin.setUsername("Admin");
+        admin.setLastname("Adminov");
         admin.setAge(42);
         admin.setEmail("admin@mail.ru");
         admin.setPassword(passwordEncoder.encode("1111"));
@@ -51,13 +51,12 @@ public class Init implements ApplicationListener<ContextRefreshedEvent> {
         userDao.saveUser(admin);
 
         User user = new User();
-        user.setUsername("user");
-        user.setLastname("user");
-        user.setAge(15);
+        user.setUsername("User");
+        user.setLastname("Userov");
+        user.setAge(25);
         user.setEmail("user@mail.ru");
         user.setPassword(passwordEncoder.encode("2222"));
         user.setRoles(userRoles);
         userDao.saveUser(user);
     }
 }
-
