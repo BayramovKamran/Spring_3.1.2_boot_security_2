@@ -30,11 +30,11 @@ public class Init implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
         Role userRole = new Role();
-        userRole.setName("ROLE_USER");
+        userRole.setRole("ROLE_USER");
         roleDao.saveRole(userRole);
 
         Role adminRole = new Role();
-        adminRole.setName("ROLE_ADMIN");
+        adminRole.setRole("ROLE_ADMIN");
         roleDao.saveRole(adminRole);
 
         List<Role> userRoles = List.of(userRole);

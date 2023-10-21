@@ -28,10 +28,12 @@
     <input type="password" th:field="*{password}" id="password">
     <br>
     <label for="role">Role</label>
+
     <select th:field="*{roles}" th:type="text" id="role">
         <option th:each="role : ${roles}"
                 th:value="${role}"
-                th:text="${role.getName()}">
+                th:text="${role.getRole()}">
+
         </option>
     </select>
     <br/>

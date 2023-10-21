@@ -23,9 +23,9 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public List<Role> getByName(String name) {
-        String JPAql = "SELECT role FROM Role role WHERE role.name = :name";
-        return entityManager.createQuery(JPAql, Role.class).setParameter("name", name)
+    public List<Role> getByName(String role) {
+        String JPAql = "SELECT role FROM Role role WHERE role.role = :role";
+        return entityManager.createQuery(JPAql, Role.class).setParameter("role", role)
                 .getResultStream().collect(Collectors.toList());
     }
 
