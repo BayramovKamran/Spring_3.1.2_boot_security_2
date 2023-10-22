@@ -1,41 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Update user</title>
 </head>
 <body>
-<h1>Редактировать пользователя</h1>
-
-<form th:method="PATCH" th:action="@{/admin/edit/{id}(id=${user.getId()})}" th:object="${user}">
-    <label for="username">Name</label>
+<h1>Edit user</h1>
+<form th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}" th:method="PATCH">
+    <label for="username">Name: </label>
     <input type="text" th:field="*{username}" id="username">
-    <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">First Name error</div>
-    <br>
-    <label for="lastname">lastName</label>
-    <input type="text" th:field="*{lastname}" id="lastname">
-    <div style="color: red" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Last Name error</div>
-    <br>
-    <label for="age">Age</label>
+    <br/>
+    <label for="lastName">LastName: </label>
+    <input type="text" th:field="*{lastname}" id="LastName">
+    <br/>
+    <label for="age">Age: </label>
     <input type="text" th:field="*{age}" id="age">
-    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
-    <br>
-    <label for="email">Email</label>
+    <br/>
+    <label for="email">Email: </label>
     <input type="text" th:field="*{email}" id="email">
-    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
-    <br>
-    <label for="password">Password</label>
-    <input type="text" th:field="*{password}" id="password">
-    <br>
+    <br/>
+    <label for="password">Password: </label>
+    <input type="password" th:field="*{password}" id="password">
+    <br/>
     <label for="role">Role</label>
-    <select th:field="*{roles}" th:type="text" id="role">
-        <option th:each="role : ${roles}"
-                th:value="${role}"
-                th:text="${role.getRole()}">
-
+    <select name="roles1"  th:type="text" id="role">
+        <option th:each="role:${rolesList}" th:value="${role.getName()}"
+                th:text="${role.getName()}"></option>
         </option>
     </select>
-    <br>
+    <br/>
     <input type="submit" value="Edit">
 </form>
 </body>
+</html>

@@ -36,7 +36,7 @@ public class User implements UserDetails {
     @Size(min = 4, message = "В фамилии должно быть не менее 4 знаков")
     private String lastname;
     @Column(name = "age")
-    @Max(100)
+    @Max(value = 100,message = "Возраст не должен быть более 100 лет")
     private Integer age;
     @Column(name = "email")
     @NotEmpty(message = "email не должен быть пустым")
