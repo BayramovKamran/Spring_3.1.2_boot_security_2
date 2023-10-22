@@ -36,7 +36,7 @@ public class User implements UserDetails {
     @Size(min = 4, message = "В фамилии должно быть не менее 4 знаков")
     private String lastname;
     @Column(name = "age")
-    @Max(value = 100,message = "Возраст не должен быть более 100 лет")
+    @Max(value = 100, message = "Возраст не должен быть более 100 лет")
     private Integer age;
     @Column(name = "email")
     @NotEmpty(message = "email не должен быть пустым")
@@ -44,8 +44,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "users_roles",
+    @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
